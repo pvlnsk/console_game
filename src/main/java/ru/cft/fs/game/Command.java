@@ -2,6 +2,7 @@ package ru.cft.fs.game;
 
 import lombok.Getter;
 
+import java.util.Optional;
 import java.util.stream.Stream;
 
 @Getter
@@ -23,5 +24,15 @@ public enum Command {
                 .filter(command -> command.getCode().equalsIgnoreCase(code))
                 .findAny()
                 .orElse(Command.UNKNOWN);
+    }
+
+    public static Optional<Command> parseCommandNonDefault(String code) {
+        return Stream.of(Command.values())
+                .filter(command -> command.getCode().equalsIgnoreCase(code))
+                .findAny();
+    }
+
+    public String getDescription() {
+        return description;
     }
 }
