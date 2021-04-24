@@ -6,6 +6,8 @@ allprojects {
     group 'org.example'
     version '1.0-SNAPSHOT'
 
+    compileJava.options.encoding = "UTF-8"
+    compileTestJava.options.encoding = "UTF-8"
 
     dependencies {
         testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
