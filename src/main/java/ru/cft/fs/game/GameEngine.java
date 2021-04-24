@@ -15,8 +15,6 @@ public class GameEngine {
         this.boardSize = height * width;
 
         this.board = createBoard(height, width);
-
-
     }
 
     private static Cell[][] createBoard(int height, int width) {
@@ -27,6 +25,48 @@ public class GameEngine {
             }
         }
         return newBoard;
+    }
+
+    public boolean checkNotEnclave(GameObjectDto gameObjectDto) {
+        final int xCoordinate = gameObjectDto.getXCoordinate();
+        final int yCoordinate = gameObjectDto.getYCoordinate();
+        final int xLength = gameObjectDto.getFirst().getValue();
+        final int yLength = gameObjectDto.getSecond().getValue();
+        final Player player = gameObjectDto.getPlayer();
+
+        for (int i = xCoordinate; i < xCoordinate + xLength; i++) {
+            for (int j = yCoordinate; j < yCoordinate + yLength; j++) {
+                if (i >= 0 && i < getHeight() &&
+                        j >= 0 && j < getWidth()) {
+                    if (board[i][j].getState() == player.getCellState()) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+
+    public boolean checkPossibleMove(GameObjectDto gameObjectDto) {
+        final int xCoordinate = gameObjectDto.getXCoordinate();
+        final int yCoordinate = gameObjectDto.getYCoordinate();
+        final int xLength = gameObjectDto.getFirst().getValue();
+        final int yLength = gameObjectDto.getSecond().getValue();
+        if (xCoordinate + xLength > getHeight() || yCoordinate + yLength > getWidth()) {
+            return false;
+        }
+
+        for (int i = xCoordinate; i < xCoordinate + xLength; i++) {
+            for (int j = yCoordinate; j < yCoordinate + yLength; j++) {
+                if (!board[i][j].isPossibleChangeState()) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 
     public void acceptMove(GameObjectDto gameObjectDto) {
