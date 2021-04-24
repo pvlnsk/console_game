@@ -1,8 +1,5 @@
 package ru.cft.fs.game;
 
-import ru.cft.fs.game.dto.GameObjectDto;
-
-import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -19,36 +16,10 @@ public class Main {
             Player currentPlayer = lastPlayer = lastPlayer._nextPlayer();
 
             String line = scanner.nextLine();
-            System.out.println("input: " + line);
             Command command = Command.parseCommand(line);
-            if (command == Command.EXIT) {
-                break;
-            }
-            if (command == Command.NEW_GAME) {
-                gameEngine = new GameEngine(50, 50);
-                System.out.println("Start new game");
-            }
+            gameController.execute(command);
 
-            if (command == Command.MOVE) {
-                if (gameEngine == null) {
-                    break;
-                }
-                final GameObjectDto gameObjectDto = new GameObjectDto(
-                        random.nextInt(46),
-                        random.nextInt(46),
-                        Dice.randomDice(),
-                        Dice.randomDice(),
-                        currentPlayer);
-                gameEngine.acceptMove(gameObjectDto);
-            }
-            if (command == Command.DRAW) {
-                if (gameEngine == null) {
-                    break;
-                }
-                String gameState = gameEngine.getGameStateAsText();
-                System.out.println(gameState);
-            }
-
+            gameController.changePlayer();
         }
     }
 }
