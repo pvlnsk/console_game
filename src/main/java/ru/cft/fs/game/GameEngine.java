@@ -39,7 +39,7 @@ public class GameEngine {
         final int yCoordinate = gameObjectDto.getYCoordinate();
         final int xLength = gameObjectDto.getFirst().getValue();
         final int yLength = gameObjectDto.getSecond().getValue();
-        final Player player = gameObjectDto.getPlayer();
+        final CellState state = gameObjectDto.getState();
 
         for (int i = xCoordinate - 1; i < xCoordinate + xLength + 1; i++) {
             for (int j = yCoordinate - 1; j < yCoordinate + yLength + 1; j++) {
@@ -89,8 +89,8 @@ public class GameEngine {
         if (resultCheck.isPresent()) {
             throw new IllegalArgumentException(resultCheck.get());
         }
-        final CellState newCellState = gameObjectDto.getPlayer().getCellState();
-        updateCells(xCoordinate, yCoordinate, gameObjectDto.getFirst(), gameObjectDto.getSecond(), newCellState);
+        final CellState newCellState = gameObjectDto.getState();
+        updateCells(gameObjectDto);
     }
 
     private void updateCells(GameObjectDto gameObjectDto) {
@@ -105,6 +105,14 @@ public class GameEngine {
             for (int j = y; j < y + second.getValue(); j++) {
                 Cell cell = board[i][j];
                 cell.changeState(state);
+            }
+        }
+    }
+
+    public void reset() {
+        for (int i = 0; i < getHeight(); i++) {
+            for (int j = 0; j < getWidth(); j++) {
+                board[i][j].setDefault();
             }
         }
     }

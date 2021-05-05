@@ -15,6 +15,6 @@ public class GameObjectDto {
     private final int yCoordinate;
     private final Dice first;
     private final Dice second;
-    private final Player player;
+    private final CellState state;
 }
 
