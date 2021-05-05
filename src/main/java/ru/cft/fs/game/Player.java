@@ -18,10 +18,6 @@ public enum Player {
         }
     };
 
-    //    private static final Map<Player, Player> MAP = Map.of(
-//            Player.FIRST, Player.SECOND,
-//            Player.SECOND, Player.FIRST
-//    );
     @Getter
     private final CellState cellState;
 
@@ -29,10 +25,6 @@ public enum Player {
     Player(CellState cellState) {
         this.cellState = cellState;
     }
-
-//    public Player nextPlayer() {
-//        return MAP.get(this);
-//    }
 
     public abstract Player nextPlayer();
 }

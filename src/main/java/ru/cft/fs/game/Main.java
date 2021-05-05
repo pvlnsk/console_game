@@ -1,5 +1,6 @@
 package ru.cft.fs.game;
 
+import java.util.Optional;
 import java.util.Scanner;
 
 public class Main {
@@ -16,10 +17,10 @@ public class Main {
             Player currentPlayer = lastPlayer = lastPlayer._nextPlayer();
 
             String line = scanner.nextLine();
-            Command command = Command.parseCommand(line);
-            gameController.execute(command);
-
-            gameController.changePlayer();
+            Optional<Command> command = Command.parseCommand(line);
+            command.ifPresent(gameController::execute);
+            System.out.println("press enter");
+            gameController.move();
         }
     }
 }

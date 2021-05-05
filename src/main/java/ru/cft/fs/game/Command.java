@@ -1,9 +1,8 @@
 package ru.cft.fs.game;
 
-import lombok.Getter;
-
 import java.util.Optional;
 import java.util.stream.Stream;
+import lombok.Getter;
 
 @Getter
 public enum Command {
@@ -19,17 +18,10 @@ public enum Command {
         this.code = code;
     }
 
-    public static Command parseCommand(String code) {
+    public static Optional<Command> parseCommand(String code) {
         return Stream.of(Command.values())
-                .filter(command -> command.getCode().equalsIgnoreCase(code))
-                .findAny()
-                .orElse(Command.UNKNOWN);
-    }
-
-    public static Optional<Command> parseCommandNonDefault(String code) {
-        return Stream.of(Command.values())
-                .filter(command -> command.getCode().equalsIgnoreCase(code))
-                .findAny();
+            .filter(command -> command.getCode().equalsIgnoreCase(code))
+            .findAny();
     }
 
     public String getDescription() {
