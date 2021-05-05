@@ -111,13 +111,48 @@ public class GameEngine {
 
     public String getGameStateAsText() {
         StringBuilder sb = new StringBuilder(boardSize);
-        for (Cell[] rowCells : board) {
-            for (Cell cell : rowCells) {
-                sb.append(cell.getAsText()).append(" ");
+        addColNumbers(sb);
+        sb.append(System.lineSeparator());
+
+        for (int row = 1; row <= getHeight(); row++) {
+            sb.append(formattedNumber(row));
+            for (int col = 1; col <= getWidth(); col++) {
+                sb.append(board[row - 1][col - 1].getAsText()).append(" ");
             }
+            sb.append(formattedNumber(row));
+            sb.append(" ");
             sb.append(System.lineSeparator());
         }
+
+        addColNumbers(sb);
+
         return sb.toString();
+    }
+
+    private void addColNumbers(StringBuilder sb) {
+        sb.append(" ");
+        for (int col = 1; col <= getWidth(); col++) {
+            sb.append(formattedNumber(col));
+        }
+    }
+
+    private String formattedNumber(int number) {
+        return "%2d".formatted(number);
+    }
+
+    public int getHeight() {
+        return board.length;
+    }
+
+    public int getWidth() {
+        return board[0].length;
+    }
+
+    private Optional<Cell> getCell(int col, int row) {
+        if (col < 0 || row < 0 || col >= getHeight() || row >= getWidth()) {
+            return Optional.empty();
+        }
+        return Optional.of(board[col][row]);
     }
 
     private static class Cell {
