@@ -182,5 +182,13 @@ public class GameEngine {
         public String getAsText() {
             return state.getSymbol();
         }
+
+        public CellState getState() {
+            return state;
+        }
+
+        public void setDefault() {
+            state = CellState.DEFAULT;
+        }
     }
 }
