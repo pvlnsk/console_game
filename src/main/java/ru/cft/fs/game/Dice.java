@@ -1,17 +1,16 @@
 package ru.cft.fs.game;
 
-import lombok.Getter;
-
 import java.util.Random;
 import java.util.stream.Stream;
+import lombok.Getter;
 
 public enum Dice {
-    _1(1, ""),
-    _2(2, ""),
-    _3(3, ""),
-    _4(4, ""),
-    _5(5, ""),
-    _6(6, "");
+    FIRST_SIDE(1, "D1"),
+    SECOND_SIDE(2, "D2"),
+    THIRD_SIDE(3, "D3"),
+    FORTH_SIDE(4, "D4"),
+    FIFTH_SIDE(5, "D5"),
+    SIXTH_SIDE(6, "D6");
 
     private static final Random random = new Random();
     private static final int SIZE = Dice.values().length;
@@ -26,11 +25,11 @@ public enum Dice {
         this.text = text;
     }
 
-    private static Dice ofInt(int _int) {
+    private static Dice ofInt(int value) {
         return Stream.of(Dice.values())
-                .filter(dice -> dice.value == _int)
-                .findAny()
-                .orElseThrow();
+            .filter(dice -> dice.value == value)
+            .findAny()
+            .orElseThrow();
     }
 
     public static Dice randomDice() {
