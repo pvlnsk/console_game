@@ -6,16 +6,15 @@ import lombok.Getter;
 
 @Getter
 public enum Command {
-    EXIT("exit"),
-    NEW_GAME("new game"),
-    MOVE("move"),
-    UNKNOWN("unknown"),
-    DRAW("draw");
+    EXIT("exit", "Выход"),
+    NEW_GAME("new game", "Новая игра");
 
     private final String code;
+    private final String description;
 
-    Command(String code) {
+    Command(String code, String description) {
         this.code = code;
+        this.description = description;
     }
 
     public static Optional<Command> parseCommand(String code) {

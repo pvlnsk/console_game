@@ -8,14 +8,10 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
+        GameController gameController = new GameController(new GameEngine(50, 50),
+            new ConsolePrinter());
 
-        Random random = new Random();
-
-        GameEngine gameEngine = null;
-        Player lastPlayer = Player.FIRST;
         while (true) {
-            Player currentPlayer = lastPlayer = lastPlayer._nextPlayer();
-
             String line = scanner.nextLine();
             Optional<Command> command = Command.parseCommand(line);
             command.ifPresent(gameController::execute);
