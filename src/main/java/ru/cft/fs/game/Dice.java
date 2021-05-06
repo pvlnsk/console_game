@@ -3,7 +3,9 @@ package ru.cft.fs.game;
 import java.util.Random;
 import java.util.stream.Stream;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public enum Dice {
     FIRST_SIDE(1, "D1"),
     SECOND_SIDE(2, "D2"),
@@ -26,6 +28,8 @@ public enum Dice {
     }
 
     private static Dice ofInt(int value) {
+        log.info("run ofInt with parameter: {}", value);
+
         return Stream.of(Dice.values())
             .filter(dice -> dice.value == value)
             .findAny()
@@ -33,6 +37,8 @@ public enum Dice {
     }
 
     public static Dice randomDice() {
+        log.info("run randomDice");
+
         Random random = Dice.random;
         int value = random.nextInt(SIZE) + 1;
         return ofInt(value);

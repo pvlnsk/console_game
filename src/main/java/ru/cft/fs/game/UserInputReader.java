@@ -11,6 +11,10 @@ public class UserInputReader {
     }
 
     public String getLine() {
-        return scanner.nextLine();
+        log.info("Waiting for user input...");
+
+        final String input = scanner.nextLine();
+        log.info("User input: \"{}\"", input);
+        return input;
     }
 }

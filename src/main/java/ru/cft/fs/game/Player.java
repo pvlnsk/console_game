@@ -1,19 +1,25 @@
 package ru.cft.fs.game;
 
+import java.util.function.IntBinaryOperator;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
-
+@Slf4j
 public enum Player {
 
     FIRST(CellState.PLAYER_ONE, (coordinate, diceValue) -> coordinate) {
         @Override
         public Player nextPlayer() {
+            log.info("run nextPlayer from FIRST Player");
+
             return SECOND;
         }
     },
     SECOND(CellState.PLAYER_TWO, (coordinate, diceValue) -> coordinate - diceValue + 1) {
         @Override
         public Player nextPlayer() {
+            log.info("run nextPlayer from SECOND Player");
+
             return FIRST;
         }
     };
