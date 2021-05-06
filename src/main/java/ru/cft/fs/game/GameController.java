@@ -20,6 +20,7 @@ public class GameController {
 
 
     public void move() {
+        log.info("try to move");
         consolePrinter.print(gameEngine.getGameStateAsText());
         final Optional<GameObjectDto> validGameDto = createValidGameDto();
         if (validGameDto.isEmpty()) {
@@ -27,6 +28,7 @@ public class GameController {
         }
         gameEngine.acceptMove(validGameDto.get());
         changePlayer();
+        log.info("move done");
     }
 
     public void execute(Command command) {
@@ -42,6 +44,7 @@ public class GameController {
     }
 
     public Optional<GameObjectDto> createValidGameDto() {
+        log.info("createValidGameDto started");
         consolePrinter.print("Throwing dices");
         var dice1 = Dice.randomDice();
         var dice2 = Dice.randomDice();
@@ -66,11 +69,14 @@ public class GameController {
                     currentPlayer.getCellState());
                 //FIXME выводить из чекера Optional и использовать его строку, для отображения пользователю
                 if (!gameEngine.checkPossibleMove(gameObject)) {
+                    log.info("input coordinates are not valid: x={}, y={}", x, y);
                     consolePrinter.print("Move (%d, %d) is not possible".formatted(x, y));
                     continue;
                 }
+                log.info("accepted input coordinates: x={}, y={}", x, y);
                 return Optional.of(gameObject);
             } catch (Exception e) {
+                log.info(e.getMessage());
                 consolePrinter.print("Incorrect input. Enter two integer values");
             }
         }
