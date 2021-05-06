@@ -92,7 +92,7 @@ public class GameEngine {
     }
 
     private void updateCells(GameObjectDto gameObjectDto) {
-        log.info("updatedCells");
+        log.info("Updating cells {}", gameObjectDto);
         final int x = gameObjectDto.getXCoordinate();
         final int y = gameObjectDto.getYCoordinate();
         final Dice first = gameObjectDto.getFirst();
@@ -126,7 +126,8 @@ public class GameEngine {
         sb.append(System.lineSeparator());
 
         for (int row = 1; row <= getHeight(); row++) {
-            sb.append(formattedNumber(row));
+            sb.append(formattedNumber(row))
+                .append(" ");
             for (int col = 1; col <= getWidth(); col++) {
                 sb.append(board[row - 1][col - 1].getAsText()).append(" ");
             }
@@ -141,7 +142,7 @@ public class GameEngine {
     }
 
     private void addColNumbers(StringBuilder sb) {
-        sb.append(" ");
+        sb.append("  ");
         for (int col = 1; col <= getWidth(); col++) {
             sb.append(formattedNumber(col));
         }

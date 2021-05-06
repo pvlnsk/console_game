@@ -45,6 +45,7 @@ public class GameController {
         consolePrinter.print("Throwing dices");
         var dice1 = Dice.randomDice();
         var dice2 = Dice.randomDice();
+        log.info("Roll result: {} and {}", dice1, dice2);
         while (true) {
             consolePrinter.print("Enter coordinates of rectangle with sides %d and %d"
                 .formatted(dice1.getValue(), dice2.getValue())
@@ -52,6 +53,7 @@ public class GameController {
 
             try {
                 String input = scanner.getLine();
+
                 final Optional<Command> command = Command.parseCommand(input);
                 if (command.isPresent()) {
                     execute(command.get());
