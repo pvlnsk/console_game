@@ -1,6 +1,5 @@
 package ru.cft.fs.game;
 
-import java.util.Optional;
 import java.util.Scanner;
 
 public class Main {
@@ -11,11 +10,9 @@ public class Main {
         GameController gameController = new GameController(new GameEngine(50, 50),
             new ConsolePrinter());
 
+        gameController.execute(Command.NEW_GAME);
+
         while (true) {
-            String line = scanner.nextLine();
-            Optional<Command> command = Command.parseCommand(line);
-            command.ifPresent(gameController::execute);
-            System.out.println("press enter");
             gameController.move();
         }
     }

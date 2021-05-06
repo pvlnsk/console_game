@@ -26,7 +26,6 @@ public class GameController {
             return;
         }
         gameEngine.acceptMove(validGameDto.get());
-        consolePrinter.print(gameEngine.getGameStateAsText());
         changePlayer();
     }
 
@@ -59,10 +58,11 @@ public class GameController {
                     return Optional.empty();
                 }
                 Scanner sc = new Scanner(input);
-                int x = sc.nextInt();
-                int y = sc.nextInt();
+                int x = currentPlayer.calculateCoordinate(sc.nextInt(), dice1.getValue());
+                int y = currentPlayer.calculateCoordinate(sc.nextInt(), dice2.getValue());
                 var gameObject = new GameObjectDto(x, y, dice1, dice2,
                     currentPlayer.getCellState());
+                //FIXME выводить из чекера Optional и использовать его строку, для отображения пользователю
                 if (!gameEngine.checkPossibleMove(gameObject)) {
                     consolePrinter.print("Move (%d, %d) is not possible".formatted(x, y));
                     continue;
@@ -76,6 +76,7 @@ public class GameController {
 
     private void changePlayer() {
         currentPlayer = currentPlayer.nextPlayer();
+        log.info("player changed: {}", currentPlayer);
         consolePrinter.print("turn player: " + currentPlayer.name());
     }
 }

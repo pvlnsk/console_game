@@ -12,10 +12,10 @@ public class GameEngine {
     private final int boardSize;
     private final GameEngineChecker checker;
 
+
     public GameEngine(int height, int width) {
         this.checker = new GameEngineChecker(height, width);
         this.boardSize = height * width;
-
         this.board = createBoard(height, width);
     }
 
@@ -27,8 +27,6 @@ public class GameEngine {
                 newBoard[i][j] = new Cell();
             }
         }
-        newBoard[0][0].changeState(CellState.PLAYER_ONE);
-        newBoard[height - 1][width - 1].changeState(CellState.PLAYER_TWO);
         return newBoard;
     }
 
@@ -68,8 +66,8 @@ public class GameEngine {
             return false;
         }
 
-        for (int i = xCoordinate; i < xCoordinate + xLength; i++) {
-            for (int j = yCoordinate; j < yCoordinate + yLength; j++) {
+        for (int i = xCoordinate - 1; i < xCoordinate + xLength - 1; i++) {
+            for (int j = yCoordinate - 1; j < yCoordinate + yLength - 1; j++) {
                 if (!board[i][j].isPossibleChangeState()) {
                     return false;
                 }
@@ -100,9 +98,10 @@ public class GameEngine {
         final Dice first = gameObjectDto.getFirst();
         final Dice second = gameObjectDto.getSecond();
         final CellState state = gameObjectDto.getState();
+        log.info("current state symbol: {}", state.getSymbol());
 
-        for (int i = x; i < x + first.getValue(); i++) {
-            for (int j = y; j < y + second.getValue(); j++) {
+        for (int i = x - 1; i < x + first.getValue() - 1; i++) {
+            for (int j = y - 1; j < y + second.getValue() - 1; j++) {
                 Cell cell = board[i][j];
                 cell.changeState(state);
             }
@@ -110,14 +109,18 @@ public class GameEngine {
     }
 
     public void reset() {
+        log.info("Resetting view");
         for (int i = 0; i < getHeight(); i++) {
             for (int j = 0; j < getWidth(); j++) {
                 board[i][j].setDefault();
             }
         }
+        board[0][0].changeState(CellState.PLAYER_ONE);
+        board[getHeight() - 1][getWidth() - 1].changeState(CellState.PLAYER_TWO);
     }
 
     public String getGameStateAsText() {
+        log.info("run method getGameStateAsText");
         StringBuilder sb = new StringBuilder(boardSize);
         addColNumbers(sb);
         sb.append(System.lineSeparator());
