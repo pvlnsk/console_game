@@ -1,7 +1,9 @@
 package ru.cft.fs.game;
 
 import java.util.Scanner;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class UserInputReader {
 
     private final Scanner scanner;

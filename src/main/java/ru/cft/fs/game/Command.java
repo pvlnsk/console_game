@@ -3,7 +3,9 @@ package ru.cft.fs.game;
 import java.util.Optional;
 import java.util.stream.Stream;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Getter
 public enum Command {
     EXIT("exit", "Выход"),
@@ -18,6 +20,8 @@ public enum Command {
     }
 
     public static Optional<Command> parseCommand(String code) {
+        log.info("run parseCommand with parameter: {}", code);
+
         return Stream.of(Command.values())
             .filter(command -> command.getCode().equalsIgnoreCase(code))
             .findAny();
