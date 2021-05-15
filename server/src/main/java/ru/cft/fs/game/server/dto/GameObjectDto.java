@@ -1,10 +1,10 @@
-package ru.cft.fs.game.client.dto;
+package ru.cft.fs.game.server.dto;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
-import ru.cft.fs.game.CellState;
-import ru.cft.fs.game.Dice;
+import ru.cft.fs.game.server.CellState;
+import ru.cft.fs.game.server.Dice;
 
 @RequiredArgsConstructor
 @Getter

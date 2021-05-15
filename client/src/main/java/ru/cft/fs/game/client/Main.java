@@ -1,19 +1,28 @@
 package ru.cft.fs.game.client;
 
-import java.util.Scanner;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Service;
+import ru.cft.fs.game.common.Command;
 
+@Slf4j
+@Service
 public class Main {
 
-    public static void main(String[] args) {
+    private final GameClient gameClient;
 
-        Scanner scanner = new Scanner(System.in);
-        GameController gameController = new GameController(new GameEngine(50, 50),
-            new ConsolePrinter());
+    public Main(GameClient gameClient) {
+        this.gameClient = gameClient;
+    }
 
-        gameController.execute(Command.NEW_GAME);
-
+    @EventListener
+    public void main(ContextRefreshedEvent event) {
+        gameClient.sendCommand(Command.NEW_GAME);
         while (true) {
-            gameController.move();
+            String gameState = gameClient.getGameState();
+            System.out.println(System.lineSeparator() + gameState);
+            gameClient.move();
         }
     }
 }

@@ -1,4 +1,4 @@
-package ru.cft.fs.game.client;
+package ru.cft.fs.game.server;
 
 import java.util.Random;
 import java.util.stream.Stream;

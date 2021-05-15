@@ -1,11 +1,15 @@
-package ru.cft.fs.game.client;
+package ru.cft.fs.game.server;
 
 import java.util.Objects;
 import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
-import ru.cft.fs.game.dto.GameObjectDto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import ru.cft.fs.game.server.config.GameProperties;
+import ru.cft.fs.game.server.dto.GameObjectDto;
 
 @Slf4j
+@Service
 public class GameEngine {
 
     private final Cell[][] board;
@@ -13,7 +17,11 @@ public class GameEngine {
     private final GameEngineChecker checker;
 
 
-    public GameEngine(int height, int width) {
+    @Autowired
+    public GameEngine(GameProperties properties) {
+        int height = properties.getHeight();
+        int width = properties.getWidth();
+
         this.checker = new GameEngineChecker(height, width);
         this.boardSize = height * width;
         this.board = createBoard(height, width);

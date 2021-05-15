@@ -1,11 +1,14 @@
-package ru.cft.fs.game.client;
+package ru.cft.fs.game.server;
 
 import java.util.Optional;
 import java.util.Scanner;
 import lombok.extern.slf4j.Slf4j;
-import ru.cft.fs.game.dto.GameObjectDto;
+import org.springframework.stereotype.Component;
+import ru.cft.fs.game.common.Command;
+import ru.cft.fs.game.server.dto.GameObjectDto;
 
 @Slf4j
+@Component
 public class GameController {
 
     private final GameEngine gameEngine;
@@ -86,5 +89,9 @@ public class GameController {
         currentPlayer = currentPlayer.nextPlayer();
         log.info("player changed: {}", currentPlayer);
         consolePrinter.print("turn player: " + currentPlayer.name());
+    }
+
+    public String getGameState() {
+        return gameEngine.getGameStateAsText();
     }
 }

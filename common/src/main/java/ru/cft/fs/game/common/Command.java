@@ -1,4 +1,4 @@
-package ru.cft.fs.game.client;
+package ru.cft.fs.game.common;
 
 import java.util.Optional;
 import java.util.stream.Stream;
