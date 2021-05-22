@@ -1,4 +1,4 @@
-package ru.cft.fs.game.server;
+package ru.cft.fs.game.common;
 
 public final class Colors {
 

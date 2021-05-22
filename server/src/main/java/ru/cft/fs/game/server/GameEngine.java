@@ -5,8 +5,10 @@ import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.cft.fs.game.common.CellState;
+import ru.cft.fs.game.common.Dice;
+import ru.cft.fs.game.common.GameObjectDto;
 import ru.cft.fs.game.server.config.GameProperties;
-import ru.cft.fs.game.server.dto.GameObjectDto;
 
 @Slf4j
 @Service

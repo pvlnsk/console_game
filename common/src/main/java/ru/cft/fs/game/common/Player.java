@@ -1,4 +1,4 @@
-package ru.cft.fs.game.server;
+package ru.cft.fs.game.common;
 
 import java.util.function.IntBinaryOperator;
 import lombok.Getter;

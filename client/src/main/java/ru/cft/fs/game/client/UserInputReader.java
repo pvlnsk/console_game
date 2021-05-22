@@ -1,9 +1,11 @@
-package ru.cft.fs.game.server;
+package ru.cft.fs.game.client;
 
 import java.util.Scanner;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 @Slf4j
+@Component
 public class UserInputReader {
 
     private final Scanner scanner;
