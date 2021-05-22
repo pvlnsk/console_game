@@ -22,8 +22,11 @@ public class Main {
 
     private Player currentPlayer = Player.FIRST;
 
-    public Main(GameClient gameClient, ConsolePrinter consolePrinter,
-        UserInputReader userInputReader) {
+    public Main(
+        GameClient gameClient,
+        ConsolePrinter consolePrinter,
+        UserInputReader userInputReader
+    ) {
         this.gameClient = gameClient;
         this.consolePrinter = consolePrinter;
         this.userInputReader = userInputReader;

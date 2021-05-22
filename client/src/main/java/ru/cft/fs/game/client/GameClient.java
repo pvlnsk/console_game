@@ -41,14 +41,6 @@ public class GameClient {
     return body;
   }
 
-  public String getGameState() {
-    final ResponseEntity<String> responseEntity = restTemplate
-        .getForEntity(uri + Paths.GAME_STATE, String.class);
-    final String body = responseEntity.getBody();
-    log.info("getGameState response: {}", body);
-    return body;
-  }
-
   public boolean checkPossibleMove(GameObjectDto gameObject) {
     final ResponseEntity<Boolean> responseEntity = restTemplate
         .postForEntity(uri + Paths.CHECK_POSSIBLE_MOVE, gameObject, Boolean.class);
